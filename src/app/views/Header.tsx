@@ -279,17 +279,7 @@ export default function Header(props: HeaderProps) {
                             fontSize: btnPerson,
                             p: 0.1,
                           }}
-                        >
-                          {/* <img
-                            className="LogoMenu"
-                            style={{
-                              objectFit: "scale-down",
-                              width: "60%",
-                              height: "1000%",
-                            }}
-                            src={logoNL}
-                          /> */}
-                        </Button>
+                        ></Button>
                       </>
                     }
                     onClose={handleCloseDial}

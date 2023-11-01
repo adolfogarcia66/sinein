@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import Inicio from "../views/Inicio";
 import { Bienvenido } from "../views/Bienvenido";
+import Inicio from "../views/Inicio";
 import { Analisis } from "../views/layers/analisis/analisis";
-import { Investigacion } from "../views/layers/investigacion/investigacion";
-import { Inteligencia } from "../views/layers/inteligencia/inteligencia";
 import { Confianza } from "../views/layers/confianza/confianza";
+import { Inteligencia } from "../views/layers/inteligencia/inteligencia";
+import { Investigacion } from "../views/layers/investigacion/investigacion";
 import { Veritas } from "../views/layers/veritas/veritas";
 
 export const AppRouter = () => {

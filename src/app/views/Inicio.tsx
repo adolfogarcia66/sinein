@@ -93,9 +93,7 @@ interface Props {
 
 export default function Inicio({ children }: Props) {
   const navigate = useNavigate();
-  const theme = useTheme();
 
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const anchorRef = useRef<HTMLButtonElement>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [placement, setPlacement] = useState<PopperPlacementType>();
@@ -186,7 +184,7 @@ export default function Inicio({ children }: Props) {
               aria-haspopup="true"
               onClick={handleToggle("left")}
             >
-              <Avatar sx={{ width: 56, height: 56 }}>
+              <Avatar sx={{ width: 40, height: 40 }}>
                 <PersonIcon
                   sx={{
                     width: "100%", // Ajusta el ancho al 100% para llenar el Avatar
