@@ -313,13 +313,7 @@ button.VerVideos:hover {
 
 }
 
-.containerCarrucelBienvenido{
-  contain: content;
-  overflow: visible;
-  width: 100%;
-  height: 100%;
 
-}
 .ContainerVisualizacionSPEI{
   contain: content;
   align-items: center;
@@ -440,12 +434,6 @@ img.imgDentroDeHeaderInicio {
   border-radius: 60
 }
 
-img.imgrCarrucelBienvenido{
-  /* background-color: #82b4e6; */
-  width: 100%;
-  height: 100%;
-  object-fit: "scale-down";
-}
 
  img {
   width: 200px;
@@ -505,15 +493,7 @@ img.rounded-corners {
   border-radius: 40px;
 }
 
-.Typography-Titulo-Menu {
 
-  font-family: sans-serif;
-  font-weight: bold;
-  color: rgb(207, 35, 35);
-  /* margin-right:5rem; */
-  font-size: 44px;
-
-}
 
 h1 {
   font-family: sans-serif;
@@ -625,96 +605,17 @@ h5.label-UsuariosDisabled {
 }
 
 
-h6.TextoMenuHeader {
-  padding-left: 10px;
-  text-align: start;
-  font-size: 15px;
-  font-family: sans-serif;
-  /* font-weight: bold; */
-  color: #15212f;
-  margin-right: 2rem;
-
-}
-
-h6.FuenteDeBotonesTooltip {
-  font-size: 15px;
-  font-family: sans-serif;
-  /* font-weight: bold; */
-  color: #15212f;
-  margin-right: 2rem;
-
-}
-
-h6 {
-  font-family: sans-serif;
-  font-weight: bold;
-  color: rgb(175, 140, 85);
-  margin-right: 2rem;
-  /* mr: "2rem" */
-}
-
-h6.h6-justify {
-  font-family: sans-serif;
-  font-weight: bold;
-  color: #15212f;
-  text-align: justify;
-
-}
-
-h6.tooltipLogos {
-  z-index: auto;
-  text-align: center;
-  font-family: sans-serif;
-  /* font-weight: bold; */
-  color: rgb(14, 13, 13);
-  font-size: 15px;
-
-  /* mr: "2rem" */
-}
-
-h6.TextoHeader {
-  text-align: justify;
-  font-family: sans-serif;
-  /* font-weight: bold; */
-  color: rgb(14, 13, 13);
-  font-size: 15px;
-  padding-left: 20px;
-
-  /* mr: "2rem" */
-}
-
-h6.SubTextoHeader {
-  text-align: justify;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: rgb(14, 13, 13);
-  font-size: 14px;
-
-  /* mr: "2rem" */
-}
-
-h6.TextoHeaderCuentaModal {
-  padding-top: 30px;
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: rgb(14, 13, 13);
-  font-size: 16px;
-
-  /* mr: "2rem" */
-}
 
 
 
 
 
-h5 {
-  font-family: sans-serif;
-  font-weight: bold;
-  color: rgb(175, 140, 85);
-  margin-right: 2rem;
-  margin-right: 2rem;
-}
+
+
+
+
+
+
 
 
 
@@ -737,23 +638,7 @@ label.TypographyH6Gray {
   /* mr: "2rem" */
 }
 
-h6.DatosPrincipalesPerfil {
-  font-family: sans-serif;
-  font-weight: bold;
-  color: rgb(14, 13, 13);
-  font-size: 20px;
-  text-align: center;
-  /* mr: "2rem" */
-}
 
-h6.PieDeImagen {
-  font-family: sans-serif;
-  font-weight: bold;
-  color: rgb(14, 13, 13);
-  font-size: 10px;
-  text-align: center;
-  /* mr: "2rem" */
-}
 
 h5.DatosPrincipalesPerfil {
   font-family: sans-serif;
@@ -774,26 +659,7 @@ h5.DatosSpeiCfdi {
 }
 
 
-h5.DatosSpeiCfdiTitulo {
 
-  background-color: #d7d5d58d;
-  border-radius: 10px;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: rgb(0, 0, 0);
-  font-size: 25px;
-  text-align: center;
-  /* mr: "2rem" */
-}
-
-h6.DatosSecundariosPerfil {
-  font-family: sans-serif;
-  /* font-weight: bold; */
-  color: rgb(99, 98, 98);
-  font-size: 18px;
-  text-align: center;
-  /* mr: "2rem" */
-}
 
 label.DatosSecundariosPerfil {
   font-family: sans-serif;
@@ -1163,19 +1029,7 @@ button.ButtonColorGenericoHeaderProfileMovil:hover {
   /* padding-left: 10px; */
 }
 
-.containerBotonesHeaderPerfil {
-  overflow: hidden;
-  contain: content;
-  width: 5rem;
-  height: 5rem;
-  background-color: #af8c555f;
-  border-radius: 50%;
-  /* padding-left: 10px; */
-  /* padding: 4px; */
-  border: 1px solid #af8c555f;
 
-  /* border-bottom: 3px solid rgba(114, 76, 13, 0.641); */
-}
 
 .containerHeaderPerfilVistaMovil {
   overflow: visible;
@@ -1213,7 +1067,7 @@ button.menuHome:hover {
   font-size: 20px;
   transition-duration: 0.2s;
   font-family: sans-serif;
-  background-color: #b08c55;
+  background-color: #000000;
   color: rgb(250, 250, 250);
 
 }
@@ -1233,7 +1087,7 @@ button.menuHome:hover {
   transition-duration: 0.2s;
   font-family: sans-serif;
   /* background-color:  #b08c55e6; */
-  color: #b08c55;
+  color: #000000;
 
 }
 

@@ -5,7 +5,14 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import NotesIcon from "@mui/icons-material/Notes";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonIcon from "@mui/icons-material/Person";
-import { Backdrop, Button, Fade, Hidden, SpeedDialAction } from "@mui/material";
+import {
+  Avatar,
+  Backdrop,
+  Button,
+  Fade,
+  Hidden,
+  SpeedDialAction,
+} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -30,7 +37,6 @@ interface HeaderProps {
 
 export default function Header(props: HeaderProps) {
   const btnPerson = "120%";
-  const user = "";
 
   const navigate = useNavigate();
   const [cnotif, setCnotif] = React.useState(0);
@@ -188,8 +194,8 @@ export default function Header(props: HeaderProps) {
 
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
+    if (prevOpen.current === true && open === false && anchorRef.current) {
+      anchorRef.current.focus();
     }
 
     prevOpen.current = open;
@@ -198,13 +204,9 @@ export default function Header(props: HeaderProps) {
   return (
     <React.Fragment>
       <AppBar
-        style={{
-          paddingBottom: "1%",
-          margin: "0",
-        }}
         position="sticky"
         elevation={0}
-        sx={{ width: "99%" }}
+        sx={{ width: "99%", backgroundColor: "transparent" }}
       >
         <Grid
           container
@@ -231,7 +233,7 @@ export default function Header(props: HeaderProps) {
                   className="buttonMenuBurger"
                   onClick={() => onDrawerToggle()}
                 >
-                  <NotesIcon sx={{ width: "100%", height: "100%" }} />
+                  <NotesIcon />
                 </Button>
               </div>
             </Tooltip>
@@ -333,45 +335,30 @@ export default function Header(props: HeaderProps) {
                       justifyContent="flex-end"
                       alignItems="center"
                     >
-                      <Typography variant="h6" className="TextoHeader">
+                      <Typography variant="body2" color={"#000000"}>
                         Adolfo Angel Garcia
                       </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid item>
-                  <Badge
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
-                    badgeContent={cnotif}
-                    max={10}
-                    color="primary"
-                  >
-                    <div className="containerBotonesHeaderPerfil">
-                      <Tooltip title="Haz click para ver más">
-                        <Button
-                          className="ButtonColorGenericoHeaderProfile"
-                          ref={anchorRef}
-                          id="composition-button"
-                          aria-controls={open ? "composition-menu" : undefined}
-                          aria-expanded={open ? "true" : undefined}
-                          aria-haspopup="true"
-                          onClick={handleToggle("left")}
-                          color="inherit"
-                        >
-                          <PersonIcon
-                            sx={{
-                              width: "60%",
-                              height: "60%",
-                            }}
-                            className="IconoDentroBotonPerfil"
-                          />
-                        </Button>
-                      </Tooltip>
-                    </div>
-                  </Badge>
+                  <Tooltip title="Haz click para ver más">
+                    <Button
+                      aria-controls={open ? "composition-menu" : undefined}
+                      aria-expanded={open ? "true" : undefined}
+                      aria-haspopup="true"
+                      onClick={handleToggle("left")}
+                    >
+                      <Avatar sx={{ width: 56, height: 56 }}>
+                        <PersonIcon
+                          sx={{
+                            width: "100%", // Ajusta el ancho al 100% para llenar el Avatar
+                            height: "100%", // Ajusta el alto al 100% para llenar el Avatar
+                          }}
+                        />
+                      </Avatar>
+                    </Button>
+                  </Tooltip>
                 </Grid>
                 <Popper
                   open={open}

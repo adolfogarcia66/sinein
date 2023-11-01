@@ -8,7 +8,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Plogin />} />
-          <Route path="/inicio" element={<AppRouter />} />
+          <Route path="/*" element={<AppRouter />} />
         </Routes>
       </BrowserRouter>
     </div>
