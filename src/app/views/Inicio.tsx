@@ -36,6 +36,7 @@ import MultilineChartIcon from "@mui/icons-material/MultilineChart";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
 import WarningIcon from "@mui/icons-material/Warning";
+import logos from "../assets/img/logo-jugos-del-valle.svg";
 import { useNavigate } from "react-router-dom";
 const drawerWidth: number = 240;
 
@@ -242,6 +243,17 @@ export default function Inicio({ children }: Props) {
             px: [1],
           }}
         >
+          <img
+            src={logos}
+            alt="Descripción de la imagen"
+            width="100"
+            height="70"
+            onClick={() => navigate("/inicio")} // Agrega un evento onClick
+            style={{
+              cursor: "pointer",
+              marginRight: "20px",
+            }}
+          />
           <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon sx={{ ml: "auto" }} />
           </IconButton>

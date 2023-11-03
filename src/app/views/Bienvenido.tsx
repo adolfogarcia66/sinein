@@ -1,28 +1,8 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Grid } from "@mui/material";
+import { BarChart, LineChart, PieChart } from "@mui/x-charts";
+import { CardC } from "./share/Card";
 
 export const Bienvenido = () => {
-  const cardStyle = {
-    backgroundColor: "#007bff", // Cambia esto al color deseado
-    color: "#fff", // Color del texto
-    borderRadius: "10px", // Borde redondeado
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", // Sombra
-    maxWidth: 400,
-  };
-
-  const textStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
-    textAlign: "center",
-  };
-
   return (
     <Grid
       container
@@ -38,93 +18,55 @@ export const Bienvenido = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={12} sm={12} md={4} lg={3}>
-          <Card sx={cardStyle}>
-            <CardContent>
-              <Typography
-                variant="h4"
-                gutterBottom
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                Investigaciones
-              </Typography>
-              <Typography
-                variant="h4"
-                component="div"
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                1
-              </Typography>
-            </CardContent>
-          </Card>
+        <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
+          <CardC></CardC>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} lg={3}>
-          <Card sx={cardStyle}>
-            <CardContent>
-              <Typography
-                variant="h4"
-                gutterBottom
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                Inteligencia
-              </Typography>
-              <Typography
-                variant="h4"
-                component="div"
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                1
-              </Typography>
-            </CardContent>
-          </Card>
+        <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
+          <CardC></CardC>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} lg={3}>
-          <Card sx={cardStyle}>
-            <CardContent>
-              <Typography
-                variant="h4"
-                gutterBottom
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                Análisis
-              </Typography>
-              <Typography
-                variant="h4"
-                component="div"
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                1
-              </Typography>
-            </CardContent>
-          </Card>
+        <Grid item xs={12} sm={12} md={4} lg={6}>
+          <BarChart
+            series={[
+              { data: [3, 4, 1, 6, 5], stack: "A", label: "Series A1" },
+              { data: [4, 3, 1, 5, 8], stack: "A", label: "Series A2" },
+              { data: [4, 2, 5, 4, 1], stack: "B", label: "Series B1" },
+              { data: [2, 8, 1, 3, 1], stack: "B", label: "Series B2" },
+              { data: [10, 6, 5, 8, 9], label: "Series C1" },
+            ]}
+            width={400}
+            height={250}
+          />
         </Grid>
-        <Grid item xs={12} sm={12} md={4} lg={3}>
-          <Card sx={cardStyle}>
-            <CardContent>
-              <Typography
-                variant="h4"
-                gutterBottom
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                Pruebas de Confianza
-              </Typography>
-              <Typography
-                variant="h4"
-                component="div"
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                1
-              </Typography>
-            </CardContent>
-          </Card>
+      </Grid>
+
+      <Grid
+        container
+        spacing={2}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        paddingTop={"10px"}
+      >
+        <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
+          <CardC></CardC>
+        </Grid>
+        <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
+          <CardC></CardC>
+        </Grid>
+        <Grid item xs={12} sm={12} md={4} lg={6}>
+          <PieChart
+            series={[
+              {
+                data: [
+                  { id: 0, value: 10, label: "series A" },
+                  { id: 1, value: 15, label: "series B" },
+                  { id: 2, value: 20, label: "series C" },
+                ],
+              },
+            ]}
+            width={400}
+            height={250}
+          />
         </Grid>
       </Grid>
       <Grid
@@ -135,31 +77,24 @@ export const Bienvenido = () => {
         alignItems="center"
         paddingTop={"10px"}
       >
-        <Grid item xs={12} sm={12} md={4} lg={3}>
-          <Card sx={cardStyle}>
-            <CardContent>
-              <Typography
-                variant="h4"
-                gutterBottom
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                Veritas
-              </Typography>
-              <Typography
-                variant="h4"
-                component="div"
-                textAlign={"center"}
-                sx={textStyle}
-              >
-                1
-              </Typography>
-            </CardContent>
-          </Card>
+        <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
+          <CardC></CardC>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} lg={3}></Grid>
-        <Grid item xs={12} sm={12} md={4} lg={3}></Grid>
-        <Grid item xs={12} sm={12} md={4} lg={3}></Grid>
+        <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
+          <CardC></CardC>
+        </Grid>
+        <Grid item xs={12} sm={12} md={4} lg={6}>
+          <LineChart
+            xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+            series={[
+              {
+                data: [2, 5.5, 2, 8.5, 1.5, 5],
+              },
+            ]}
+            width={400}
+            height={250}
+          />
+        </Grid>
       </Grid>
     </Grid>
   );

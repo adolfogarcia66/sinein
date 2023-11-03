@@ -151,17 +151,20 @@ export const AnalisisModal = ({
 
           <Grid
             container
-            direction="row"
-            justifyContent="center"
             alignItems="center"
+            justifyContent="center"
+            spacing={1}
             xs={12}
             sm={12}
             md={12}
             lg={12}
             sx={{ padding: "2%" }}
           >
-            <Grid item alignItems="center" justifyContent="center" xs={2}>
+            <Grid item xs={12} sm={12} md={12} lg={2}></Grid>
+            <Grid item xs={12} sm={12} md={12} lg={2}></Grid>
+            <Grid item xs={12} sm={12} md={12} lg={2}>
               <Button
+                fullWidth
                 startIcon={<AddTaskIcon />}
                 variant="contained"
                 sx={{
@@ -173,8 +176,9 @@ export const AnalisisModal = ({
                 {tipo === 1 ? "Agregar" : "Actualizar"}
               </Button>
             </Grid>
-            <Grid item alignItems="center" justifyContent="center" xs={2}>
+            <Grid item xs={12} sm={12} md={12} lg={2}>
               <Button
+                fullWidth
                 startIcon={<CloseIcon />}
                 variant="contained"
                 color="error"
@@ -184,6 +188,8 @@ export const AnalisisModal = ({
                 {"Salir"}
               </Button>
             </Grid>
+            <Grid item xs={12} sm={12} md={12} lg={2}></Grid>
+            <Grid item xs={12} sm={12} md={12} lg={2}></Grid>
           </Grid>
         </Box>
       </ModalForm>
