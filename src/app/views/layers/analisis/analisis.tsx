@@ -6,11 +6,23 @@ import ButtonsDeleted from "../../share/ButtonsDeleted";
 import ButtonsEdit from "../../share/ButtonsEdit";
 import MUIXDataGrid from "../../share/MUIXDataGrid";
 import TitleComponent from "../../share/TitleComponent";
+import { AnalisisModal } from "./AnalisisModal";
 
 export const Analisis = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
-  const handleOpen = (v: any) => {};
+  const [vrows, setVrows] = useState({});
+  const [tipo, setTipo] = useState(0);
+  const [openModal, setopenModal] = useState<boolean>(false);
+
+  const handleClose = () => {
+    setopenModal(false);
+  };
+
+  const handleOpen = (v: any) => {
+    setTipo(1);
+    setopenModal(true);
+  };
   const handleEdit = (v: any) => {};
   const handleDeleted = (v: any) => {};
   const columnsRel: GridColDef[] = [
@@ -108,6 +120,11 @@ export const Analisis = () => {
           <MUIXDataGrid columns={columnsRel} rows={data} />
         </Grid>
       </Grid>
+      {openModal ? (
+        <AnalisisModal handleClose={handleClose} tipo={tipo} dt={vrows} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

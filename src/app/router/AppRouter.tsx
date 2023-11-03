@@ -4,8 +4,8 @@ import Inicio from "../views/Inicio";
 import { Analisis } from "../views/layers/analisis/analisis";
 import { Confianza } from "../views/layers/confianza/confianza";
 import { Inteligencia } from "../views/layers/inteligencia/inteligencia";
-import { Investigacion } from "../views/layers/investigacion/investigacion";
 import { Veritas } from "../views/layers/veritas/veritas";
+import { Investigacion } from "../views/layers/investigacion/investigacion";
 
 export const AppRouter = () => {
   return (
