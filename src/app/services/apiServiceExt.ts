@@ -1,127 +1,57 @@
 import axios from "axios";
-import { getRfToken, getToken } from "./localStorage";
+import { getHeaderInfo } from "./tokenCreator";
 
-export const postSingle = async function (url: string, body: any) {
-  try {
-    let resp = await axios.post(
-      process.env.REACT_APP_APPLICATION_BASE_URL_EXT + url,
-      body,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    return resp;
-  } catch (err: any) {
-    return err.response;
-  }
+/**
+ * MANEJO AUTOMATICO DE PETICIONES
+ *
+ * ADOLFO ANGEL GARCIA 10/08/2022
+ */
+
+const handleResponseDoc = (response: any) => {
+  let rs;
+  rs = {
+    RESPONSE: response.data.RESPONSE,
+    SUCCESS: response.data.SUCCESS,
+    NUMCODE: response.data.NUMCODE,
+    STRMESSAGE: response.data.STRMESSAGE,
+  };
+  return rs;
+};
+const handleResponse = (response: any) => {
+  let rs;
+  rs = {
+    RESPONSE: response.RESPONSE,
+    SUCCESS: response.SUCCESS,
+    NUMCODE: response.NUMCODE,
+    STRMESSAGE: response.STRMESSAGE,
+  };
+  return rs;
 };
 
 export const post = async function (url: string, body: any) {
+  let header = await getHeaderInfo();
   try {
     let resp = await axios.post(
-      process.env.REACT_APP_APPLICATION_BASE_URL_EXT + url,
+      process.env.REACT_APP_APPLICATION_BASE_URL + url,
       body,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: JSON.parse(String(getToken())),
-        },
-      }
+      header
     );
-
-    return resp;
+    return handleResponse(resp.data);
   } catch (err: any) {
-    return err.response;
+    return handleResponse(err.response);
   }
 };
 
-export const postRefresh = async function (url: string) {
+export const postDoc = async function (url: string, body: any) {
+  let header = await getHeaderInfo();
   try {
     let resp = await axios.post(
-      process.env.REACT_APP_APPLICATION_BASE_URL_EXT + url,
-      { refreshToken: String(getRfToken()).replace(/["']/g, "") },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    return resp;
-  } catch (err: any) {
-    return err.response;
-  }
-};
-
-export const get = async function (url: string) {
-  try {
-    let resp = await axios.get(
-      process.env.REACT_APP_APPLICATION_BASE_URL_EXT + url,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: JSON.parse(String(getToken())),
-        },
-      }
-    );
-
-    return resp;
-  } catch (err: any) {
-    return err.response;
-  }
-};
-
-export const put = async function (refreshToken: string) {
-  try {
-    let resp = await axios.get(
-      String(process.env.REACT_APP_APPLICATION_BASE_URL_EXT),
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: refreshToken,
-        },
-      }
-    );
-
-    return resp;
-  } catch (err: any) {
-    return err.response;
-  }
-};
-export const putPass = async function (url: string, body: any) {
-  try {
-    let resp = await axios.put(
-      process.env.REACT_APP_APPLICATION_BASE_URL_EXT + url,
+      process.env.REACT_APP_APPLICATION_BASE_URL + url,
       body,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: JSON.parse(String(getToken())),
-        },
-      }
+      header
     );
-
-    return resp;
+    return handleResponseDoc(resp);
   } catch (err: any) {
-    return err.response;
-  }
-};
-
-export const getSingle = async function (url: string, body: any) {
-  try {
-    let resp = await axios.get(
-      process.env.REACT_APP_APPLICATION_BASE_URL_EXT + url + body,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    return resp;
-  } catch (err: any) {
-    return err.response;
+    return handleResponseDoc(err.response);
   }
 };
