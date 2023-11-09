@@ -13,18 +13,51 @@ import {
 import backgroundImg from "../assets/img/backgroundImg.jpg"; // Importa la imagen desde tu carpeta assets
 import logo from "../assets/img/logop.png";
 import { useNavigate } from "react-router-dom";
+import Progress from "./share/Progress";
+import { useState } from "react";
+import { Servicios } from "../services/Servicios";
+import { AlertS } from "../helpers/AlertS";
 
 export const Plogin = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [slideropen, setslideropen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [pass, setPass] = useState("");
+  const login = () => {
+    setslideropen(true);
+    let data = {
+      nombreUsuario: username,
+      Password: pass,
+    };
 
-  const login = (data: any) => {
-    navigate("/inicio");
+    Servicios.login(data).then((res) => {
+      if (res.SUCCESS) {
+        if (res.RESPONSE) {
+          navigate("/inicio");
+        } else {
+          AlertS.fire({
+            title: "¡Error!",
+            text: "Favor de Validar sus Credenciales",
+            icon: "error",
+          });
+        }
+        setslideropen(false);
+      } else {
+        setslideropen(false);
+        AlertS.fire({
+          title: "¡Error!",
+          text: "Sin Respuesta",
+          icon: "error",
+        });
+      }
+    });
   };
 
   return (
     <div>
+      <Progress open={slideropen}></Progress>
       <Grid container component="main" sx={{ height: "100vh" }}>
         {" "}
         {/* Cambiar a sx= */}
@@ -86,10 +119,12 @@ export const Plogin = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Usuario"
               name="email"
               autoComplete="email"
               autoFocus
+              value={username}
+              onChange={(v) => setUsername(v.target.value)}
             />
             <TextField
               variant="outlined"
@@ -100,7 +135,8 @@ export const Plogin = () => {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              value={pass}
+              onChange={(v) => setPass(v.target.value)}
             />
             {/* <FormControlLabel
             control={<Checkbox value="remember" />}
@@ -114,6 +150,7 @@ export const Plogin = () => {
                 marginTop: "20px", // Agregar margen superior
               }}
               onClick={login}
+              disabled={!(username.trim() !== "" && pass.trim() !== "")}
             >
               Ingresar
             </Button>
