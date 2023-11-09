@@ -1,7 +1,7 @@
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 import SelectValues from "../../../interfaces/Share";
 import CustomizedDate from "../../share/CustomizedDate";
@@ -11,6 +11,7 @@ import SelectFrag from "../../share/SelectFrag";
 import { useLoadFilter } from "../../../Hook/select";
 import { AlertS } from "../../../helpers/AlertS";
 import { Servicios } from "../../../services/Servicios";
+import { getItem } from "../../../services/localStorage";
 export const VeritasModal = ({
   handleClose,
   tipo,
@@ -23,7 +24,7 @@ export const VeritasModal = ({
   const [show, setShow] = useState(false);
   const [fa, setfa] = useState<Dayjs | null>();
   const [fna, setfna] = useState<Dayjs | null>();
-
+  const [id, setid] = useState("");
   const [folio, setfolio] = useState("");
   const [nombre, setnombre] = useState("");
   const [numeroempleado, setnumeroempleado] = useState("");
@@ -55,7 +56,8 @@ export const VeritasModal = ({
   const handleSend = () => {
     setShow(true);
     let data = {
-      NUMOPERACION: 1,
+      CHID: id,
+      NUMOPERACION: tipo,
       Nombre: nombre,
       NumeroEmpleado: numeroempleado,
       CURP: curp,
@@ -66,7 +68,7 @@ export const VeritasModal = ({
       FechaAplicacion: fa,
       FechaNuevaAplicacion: fna,
       Observaciones: observacion,
-      CHUSER: "1",
+      CHUSER: getItem("id"),
     };
 
     Servicios.Veritas(data).then((res) => {
@@ -77,6 +79,7 @@ export const VeritasModal = ({
           icon: "success",
         });
         setShow(false);
+        handleClose();
       } else {
         setShow(false);
         AlertS.fire({
@@ -90,7 +93,23 @@ export const VeritasModal = ({
 
   useLoadFilter(3, settipopruebas);
   useLoadFilter(2, setresultados);
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    if (tipo === 2) {
+      setfa(dayjs(dt.FechaAplicacion));
+      setfna(dayjs(dt.FechaNuevaAplicacion));
+      setid(dt.Id);
+      setfolio(dt.FolioInterno);
+      setnombre(dt.Nombre);
+      setnumeroempleado(dt.NumeroEmpleado);
+      setcurp(dt.CURP);
+      setarea(dt.Area);
+      setpuesto(dt.Puesto);
+      setobservacion(dt.Observaciones);
+      settipoprueba(dt.ctpid);
+      setresultado(dt.crid);
+    }
+  }, [dt]);
 
   return (
     <>

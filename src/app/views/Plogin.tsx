@@ -17,6 +17,7 @@ import Progress from "./share/Progress";
 import { useState } from "react";
 import { Servicios } from "../services/Servicios";
 import { AlertS } from "../helpers/AlertS";
+import { setItem } from "../services/localStorage";
 
 export const Plogin = () => {
   const navigate = useNavigate();
@@ -34,7 +35,8 @@ export const Plogin = () => {
 
     Servicios.login(data).then((res) => {
       if (res.SUCCESS) {
-        if (res.RESPONSE) {
+        if (res.RESPONSE.respuesta) {
+          setItem(res.RESPONSE.id, "id");
           navigate("/inicio");
         } else {
           AlertS.fire({

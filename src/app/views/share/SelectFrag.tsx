@@ -17,38 +17,46 @@ const SelectFrag = ({
 }) => {
   return (
     <FormControl sx={{ width: "100%" }}>
-      <Select
-        aria-label={"Presione enter para seleccionar"}
-        noOptionsMessage={() => "Sin opciones"}
-        value={
-          value !== "" ? options.find((element) => element.value === value) : []
-        }
-        options={options}
-        defaultValue={[]}
-        isDisabled={disabled}
-        isClearable={true}
-        isSearchable={true}
-        backspaceRemovesValue={true}
-        onChange={(v) =>
-          v === null ? onInputChange(String(disabled)) : onInputChange(v.value)
-        }
-        placeholder={placeholder}
-        theme={(theme) => ({
-          ...theme,
-          borderRadius: 0,
-          colors: {
-            ...theme.colors,
-          },
-        })}
-        styles={{
-          menu: (base) => ({
-            position: "absolute",
-            paddingLeft: "1rem",
-            zIndex: 500,
-            ...base,
-          }),
-        }}
-      />
+      {Array.isArray(options) ? (
+        <Select
+          aria-label={"Presione enter para seleccionar"}
+          noOptionsMessage={() => "Sin opciones"}
+          value={
+            value !== ""
+              ? options.find((element) => element.value === value)
+              : []
+          }
+          options={options}
+          defaultValue={[]}
+          isDisabled={disabled}
+          isClearable={true}
+          isSearchable={true}
+          backspaceRemovesValue={true}
+          onChange={(v) =>
+            v === null
+              ? onInputChange(String(disabled))
+              : onInputChange(v.value)
+          }
+          placeholder={placeholder}
+          theme={(theme) => ({
+            ...theme,
+            borderRadius: 0,
+            colors: {
+              ...theme.colors,
+            },
+          })}
+          styles={{
+            menu: (base) => ({
+              position: "absolute",
+              paddingLeft: "1rem",
+              zIndex: 500,
+              ...base,
+            }),
+          }}
+        />
+      ) : (
+        ""
+      )}
     </FormControl>
   );
 };
