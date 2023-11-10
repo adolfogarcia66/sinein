@@ -19,10 +19,18 @@ export const Bienvenido = () => {
         alignItems="center"
       >
         <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
-          <CardC></CardC>
+          <CardC
+            name={"Investigación"}
+            descripcion={"Registros Generados"}
+            valor={"1"}
+          ></CardC>
         </Grid>
         <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
-          <CardC></CardC>
+          <CardC
+            name={"Inteligencia"}
+            descripcion={"Registros generadas"}
+            valor={"1"}
+          ></CardC>
         </Grid>
         <Grid item xs={12} sm={12} md={4} lg={6}>
           <BarChart
@@ -48,10 +56,18 @@ export const Bienvenido = () => {
         paddingTop={"10px"}
       >
         <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
-          <CardC></CardC>
+          <CardC
+            name={"Análisis"}
+            descripcion={"Registros Generados"}
+            valor={"1"}
+          ></CardC>
         </Grid>
         <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
-          <CardC></CardC>
+          <CardC
+            name={"Prueba de Confianza"}
+            descripcion={"Registros Generados"}
+            valor={"1"}
+          ></CardC>
         </Grid>
         <Grid item xs={12} sm={12} md={4} lg={6}>
           <PieChart
@@ -78,11 +94,20 @@ export const Bienvenido = () => {
         paddingTop={"10px"}
       >
         <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
-          <CardC></CardC>
+          <CardC
+            name={"Veritas"}
+            descripcion={"Registros Generados"}
+            valor={"1"}
+          ></CardC>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} lg={3} style={{ height: "250px" }}>
-          <CardC></CardC>
-        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={4}
+          lg={3}
+          style={{ height: "250px" }}
+        ></Grid>
         <Grid item xs={12} sm={12} md={4} lg={6}>
           <LineChart
             xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}

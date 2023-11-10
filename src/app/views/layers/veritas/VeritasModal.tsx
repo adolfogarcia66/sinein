@@ -142,6 +142,7 @@ export const VeritasModal = ({
                 value={folio}
                 type="text"
                 fullWidth
+                size="small"
                 variant="outlined"
                 onChange={(v) => setfolio(v.target.value)}
                 disabled
@@ -155,6 +156,7 @@ export const VeritasModal = ({
                 value={nombre}
                 type="text"
                 fullWidth
+                size="small"
                 variant="outlined"
                 onChange={(v) => setnombre(v.target.value)}
               />
@@ -169,6 +171,7 @@ export const VeritasModal = ({
                 value={numeroempleado}
                 type="text"
                 fullWidth
+                size="small"
                 variant="outlined"
                 onChange={(v) => setnumeroempleado(v.target.value)}
               />
@@ -181,6 +184,7 @@ export const VeritasModal = ({
                 value={curp}
                 type="text"
                 fullWidth
+                size="small"
                 variant="outlined"
                 onChange={(v) => setcurp(v.target.value)}
               />
@@ -208,6 +212,7 @@ export const VeritasModal = ({
                 value={area}
                 type="text"
                 fullWidth
+                size="small"
                 variant="outlined"
                 onChange={(v) => setarea(v.target.value)}
               />
@@ -220,6 +225,7 @@ export const VeritasModal = ({
                 value={puesto}
                 type="text"
                 fullWidth
+                size="small"
                 variant="outlined"
                 onChange={(v) => setpuesto(v.target.value)}
               />
@@ -304,6 +310,7 @@ export const VeritasModal = ({
                 value={observacion}
                 type="text"
                 fullWidth
+                size="small"
                 variant="outlined"
                 onChange={(v) => setobservacion(v.target.value)}
               />

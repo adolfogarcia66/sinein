@@ -17,19 +17,27 @@ const textStyle = {
   textAlign: "center",
 };
 
-export const CardC = () => {
+export const CardC = ({
+  name,
+  descripcion,
+  valor,
+}: {
+  name: string;
+  descripcion: string;
+  valor: string;
+}) => {
   return (
     <div>
       <Card sx={{ ...cardStyle, position: "relative" }}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Investigación
+            {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Investigaciones en Proceso
+            {descripcion}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={textStyle}>
-            1
+            {valor}
           </Typography>
         </CardContent>
         {/* Ajusta z-index y tamaño del IconButton */}
