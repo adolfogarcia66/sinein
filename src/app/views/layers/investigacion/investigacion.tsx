@@ -11,7 +11,9 @@ import { Servicios } from "../../../services/Servicios";
 import { AlertS } from "../../../helpers/AlertS";
 import Swal from "sweetalert2";
 import { getItem } from "../../../services/localStorage";
-
+import ButtonsShare from "../../share/ButtonsShare";
+import FileOpenIcon from "@mui/icons-material/FileOpen";
+import AttachmentIcon from "@mui/icons-material/Attachment";
 export const Investigacion = () => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
@@ -44,6 +46,8 @@ export const Investigacion = () => {
     handleSend();
     setopenModal(false);
   };
+
+  const dowloandfile = (v: any) => {};
 
   const handleOpen = (v: any) => {
     setTipo(1);
@@ -102,10 +106,17 @@ export const Investigacion = () => {
       headerName: "Operaciones",
       description: "Operaciones",
       sortable: false,
-      width: 100,
+      width: 170,
       renderCell: (v: any) => {
         return (
           <>
+            <ButtonsShare
+              title={"Descargar Informe"}
+              handleFunction={dowloandfile}
+              show={true}
+              icon={<FileOpenIcon />}
+              row={undefined}
+            />
             <ButtonsEdit
               handleAccion={handleEdit}
               row={v}
@@ -116,6 +127,13 @@ export const Investigacion = () => {
               row={v}
               show={true}
             ></ButtonsDeleted>
+            <ButtonsShare
+              title={"Visual Archivos"}
+              handleFunction={dowloandfile}
+              show={true}
+              icon={<AttachmentIcon />}
+              row={undefined}
+            />
           </>
         );
       },
