@@ -55,3 +55,13 @@ export const postDoc = async function (url: string, body: any) {
     return handleResponseDoc(err.response);
   }
 };
+
+export const postFile = async function (url: string, body: any) {
+  let header = await getHeaderInfo();
+  let resp = await axios.post(
+    process.env.REACT_APP_APPLICATION_BASE_URL + url,
+    body,
+    header
+  );
+  return resp;
+};

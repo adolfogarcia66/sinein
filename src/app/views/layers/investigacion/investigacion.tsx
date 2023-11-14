@@ -14,12 +14,14 @@ import { getItem } from "../../../services/localStorage";
 import ButtonsShare from "../../share/ButtonsShare";
 import FileOpenIcon from "@mui/icons-material/FileOpen";
 import AttachmentIcon from "@mui/icons-material/Attachment";
+import VisorDocumentos from "../../share/VisorDocumentos";
 export const Investigacion = () => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [vrows, setVrows] = useState({});
   const [tipo, setTipo] = useState(0);
   const [openModal, setopenModal] = useState<boolean>(false);
+  const [openModalFile, setopenModalFile] = useState<boolean>(false);
 
   const handleSend = () => {
     setShow(true);
@@ -45,9 +47,55 @@ export const Investigacion = () => {
   const handleClose = () => {
     handleSend();
     setopenModal(false);
+    setopenModalFile(false);
   };
 
-  const dowloandfile = (v: any) => {};
+  const dowloandfile = (v: any) => {
+    console.log(v.data.id);
+    const apiUrl = "http://10.200.4.201:80/api/SINEIN/informes";
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ CHID: v.data.id }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error al obtener el archivo: ${response.status}`);
+        }
+        // Configurar los encabezados de la respuesta
+        const contentType = response.headers.get("Content-Type");
+        // Obtener el contenido como array buffer
+        return response.arrayBuffer();
+      })
+      .then((arrayBuffer) => {
+        // Crear un objeto Blob a partir del array buffer
+        const blob = new Blob([arrayBuffer]);
+
+        // Crear un objeto URL para el blob
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Crear un enlace para descargar el archivo
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "FORMATO DE INVESTIGACION.docx";
+        document.body.appendChild(link);
+
+        // Simular un clic en el enlace para iniciar la descarga
+        link.click();
+
+        // Limpiar el objeto URL después de la descarga
+        URL.revokeObjectURL(blobUrl);
+
+        // Eliminar el enlace del DOM
+        link.remove();
+      })
+      .catch((error) => {
+        console.error("Error al obtener el archivo:", error.message);
+        Swal.fire("¡Error!", error.message, "error");
+      });
+  };
 
   const handleOpen = (v: any) => {
     setTipo(1);
@@ -115,7 +163,7 @@ export const Investigacion = () => {
               handleFunction={dowloandfile}
               show={true}
               icon={<FileOpenIcon />}
-              row={undefined}
+              row={v}
             />
             <ButtonsEdit
               handleAccion={handleEdit}
@@ -128,11 +176,11 @@ export const Investigacion = () => {
               show={true}
             ></ButtonsDeleted>
             <ButtonsShare
-              title={"Visual Archivos"}
+              title={"Visualizar Archivos"}
               handleFunction={dowloandfile}
               show={true}
               icon={<AttachmentIcon />}
-              row={undefined}
+              row={v}
             />
           </>
         );
@@ -283,6 +331,15 @@ export const Investigacion = () => {
       </Grid>
       {openModal ? (
         <InvestigacionModal handleClose={handleClose} tipo={tipo} dt={vrows} />
+      ) : (
+        ""
+      )}
+      {openModalFile ? (
+        <VisorDocumentos
+          handleFunction={handleClose}
+          obj={vrows}
+          tipo={"investigacion"}
+        />
       ) : (
         ""
       )}
