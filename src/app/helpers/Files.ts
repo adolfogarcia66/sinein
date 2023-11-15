@@ -1,6 +1,10 @@
 import { Servicios } from "../services/Servicios";
 
 export function base64ToArrayBuffer(data: string) {
+  while (data.length % 4) {
+    data += "=";
+  }
+
   var bString = window.atob(data);
   var bLength = bString.length;
   var bytes = new Uint8Array(bLength);

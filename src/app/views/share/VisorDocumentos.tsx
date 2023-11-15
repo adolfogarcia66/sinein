@@ -22,6 +22,7 @@ import { ButtonsDetail } from "./ButtonsDetail";
 import MUIXDataGrid from "./MUIXDataGrid";
 import ModalForm from "./ModalForm";
 import Progress from "./Progress";
+import { base64ToArrayBuffer } from "../../helpers/Files";
 
 const VisorDocumentos = ({
   handleFunction,
@@ -119,38 +120,71 @@ const VisorDocumentos = ({
     setOpenSlider(true);
     setverarchivo(true);
     setTipoext(v.row.FileName.split(".").pop());
-    const apiUrl = "http://10.200.4.201:80/api/SINEIN/getFile";
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ CHID: v.row.id }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error al obtener el archivo: ${response.status}`);
-        }
-        // Configurar los encabezados de la respuesta
-        const contentType = response.headers.get("Content-Type");
-        console.log(contentType);
-        //
-        // Obtener el contenido como array buffer
-        return response.arrayBuffer();
-      })
-      .then((arrayBuffer) => {
-        // Crear un objeto Blob a partir del array buffer
-        const blob = new Blob([arrayBuffer]);
-        // Crear un objeto URL para el blob
-        const blobUrl = URL.createObjectURL(blob);
-        // Establecer la URL del blob en el estado
-        setURLRuta(blobUrl);
+
+    let data = {
+      CHID: v.row.id,
+    };
+
+    Servicios.GetDocumento(data).then((res) => {
+      if (res.SUCCESS) {
+        var bufferArray = base64ToArrayBuffer(String(res.RESPONSE));
+        var blobStore = new Blob([bufferArray], { type: tipoext });
+        var data = window.URL.createObjectURL(blobStore);
+        var link = document.createElement("a");
+        document.body.appendChild(link);
+        link.href = data;
+        setURLRuta(link.href);
         setOpenSlider(false);
-      })
-      .catch((error) => {
-        console.error("Error al obtener el archivo:", error.message);
-        Swal.fire("¡Error!", error.message, "error");
-      });
+        setverarchivo(true);
+      } else {
+        setOpenSlider(false);
+        Swal.fire("¡Error!", res.STRMESSAGE, "error");
+      }
+    });
+
+    // const apiUrl = "http://10.200.4.201:80/api/SINEIN/GetDocumento";
+    // fetch(apiUrl, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ CHID: v.row.id }),
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error(`Error al obtener el archivo: ${response.status}`);
+    //     }
+    //     // Configurar los encabezados de la respuesta
+    //     const contentType = response.headers.get("Content-Type");
+    //     console.log(contentType);
+    //     //
+    //     // Obtener el contenido como array buffer
+    //     return response.arrayBuffer();
+    //   })
+    //   .then((arrayBuffer) => {
+
+    //      var bufferArray = base64ToArrayBuffer(String(response.data.RESPONSE));
+    //      var blobStore = new Blob([bufferArray], {
+    //        type: "application/*",
+    //      });
+
+    //      const link = document.createElement("a");
+    //      link.href = window.URL.createObjectURL(blobStore);
+    //      link.download = "INFORME DE INVESTIGACION.docx";
+    //     link.click();
+
+    //     // Crear un objeto Blob a partir del array buffer
+    //     const blob = new Blob([arrayBuffer]);
+    //     // Crear un objeto URL para el blob
+    //     const blobUrl = URL.createObjectURL(blob);
+    //     // Establecer la URL del blob en el estado
+    //     setURLRuta(blobUrl);
+    //     setOpenSlider(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error al obtener el archivo:", error.message);
+    //     Swal.fire("¡Error!", error.message, "error");
+    //   });
   };
 
   const ProcesaSPeis = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -347,13 +381,7 @@ const VisorDocumentos = ({
                 <div className="ContainerVisualizacionSPEI">
                   {tipoext === "jpg" ? <img src={URLruta} alt="Archivo" /> : ""}
                   {tipoext === "pdf" ? (
-                    <iframe
-                      id="inlineFrameExample"
-                      title="Inline Frame Example"
-                      width="100%"
-                      height="490"
-                      src={URLruta}
-                    />
+                    <iframe width="100%" height="100%" src={URLruta} />
                   ) : (
                     ""
                   )}

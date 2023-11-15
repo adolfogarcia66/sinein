@@ -38,4 +38,8 @@ export class Servicios {
   public static async informes(data: any) {
     return await postFile("informes", data);
   }
+
+  public static async GetDocumento(data: any) {
+    return await post("GetDocumento", data);
+  }
 }
