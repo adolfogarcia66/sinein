@@ -80,7 +80,7 @@ export const Investigacion = () => {
 
           const link = document.createElement("a");
           link.href = window.URL.createObjectURL(blobStore);
-          link.download = "INFORME DE INVESTIFACION.docx";
+          link.download = "INFORME DE INVESTIGACION.docx";
           link.click();
           setShow(false);
         })
