@@ -15,6 +15,8 @@ import ButtonsShare from "../../share/ButtonsShare";
 import FileOpenIcon from "@mui/icons-material/FileOpen";
 import AttachmentIcon from "@mui/icons-material/Attachment";
 import VisorDocumentos from "../../share/VisorDocumentos";
+import axios from "axios";
+import { base64ToArrayBuffer } from "../../../helpers/Files";
 export const Investigacion = () => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
@@ -51,50 +53,50 @@ export const Investigacion = () => {
   };
 
   const dowloandfile = (v: any) => {
-    console.log(v.data.id);
-    const apiUrl = "http://10.200.4.201:80/api/SINEIN/informes";
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ CHID: v.data.id }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error al obtener el archivo: ${response.status}`);
-        }
-        // Configurar los encabezados de la respuesta
-        const contentType = response.headers.get("Content-Type");
-        // Obtener el contenido como array buffer
-        return response.arrayBuffer();
-      })
-      .then((arrayBuffer) => {
-        // Crear un objeto Blob a partir del array buffer
-        const blob = new Blob([arrayBuffer]);
+    try {
+      setShow(true);
+      let data = {
+        CHID: v.data.id,
+      };
 
-        // Crear un objeto URL para el blob
-        const blobUrl = URL.createObjectURL(blob);
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "http://10.200.4.201:80/api/SINEIN/informes",
+        headers: {
+          "Content-Type": "application/json",
+          responseType: "blob",
+        },
+        data: data,
+      };
 
-        // Crear un enlace para descargar el archivo
-        const link = document.createElement("a");
-        link.href = blobUrl;
-        link.download = "FORMATO DE INVESTIGACION.docx";
-        document.body.appendChild(link);
+      axios
+        .request(config)
+        .then((response) => {
+          var bufferArray = base64ToArrayBuffer(String(response.data.RESPONSE));
+          var blobStore = new Blob([bufferArray], {
+            type: "application/*",
+          });
 
-        // Simular un clic en el enlace para iniciar la descarga
-        link.click();
+          const link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blobStore);
+          link.download = "INFORME DE INVESTIFACION.docx";
+          link.click();
+          setShow(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setShow(false);
+        });
+    } catch (err: any) {
+      setShow(false);
+    }
+  };
 
-        // Limpiar el objeto URL después de la descarga
-        URL.revokeObjectURL(blobUrl);
-
-        // Eliminar el enlace del DOM
-        link.remove();
-      })
-      .catch((error) => {
-        console.error("Error al obtener el archivo:", error.message);
-        Swal.fire("¡Error!", error.message, "error");
-      });
+  const handlefiles = (v: any) => {
+    console.log(v);
+    setVrows(v.data.row);
+    setopenModalFile(true);
   };
 
   const handleOpen = (v: any) => {
@@ -177,7 +179,7 @@ export const Investigacion = () => {
             ></ButtonsDeleted>
             <ButtonsShare
               title={"Visualizar Archivos"}
-              handleFunction={dowloandfile}
+              handleFunction={handlefiles}
               show={true}
               icon={<AttachmentIcon />}
               row={v}

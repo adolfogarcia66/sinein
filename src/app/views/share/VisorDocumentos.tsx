@@ -22,8 +22,6 @@ import { ButtonsDetail } from "./ButtonsDetail";
 import MUIXDataGrid from "./MUIXDataGrid";
 import ModalForm from "./ModalForm";
 import Progress from "./Progress";
-import { Viewer } from "@react-pdf-viewer/core";
-import { base64ToArrayBuffer } from "../../helpers/Files";
 
 const VisorDocumentos = ({
   handleFunction,
@@ -44,7 +42,7 @@ const VisorDocumentos = ({
     let data = {
       NUMOPERACION: 2,
       modulo: tipo,
-      modulo_id: obj.id,
+      modulo_id: obj.Id,
     };
 
     Servicios.FilesAdmin(data).then((res) => {
@@ -173,7 +171,7 @@ const VisorDocumentos = ({
       const formData = new FormData();
       formData.append("NUMOPERACION", "1");
       formData.append("modulo", tipo);
-      formData.append("modulo_id", obj.id);
+      formData.append("modulo_id", obj.Id);
       formData.append("CHUSER", getItem("id"));
       formData.append("FILE", item.Archivo, item.NOMBRE);
 
@@ -317,7 +315,7 @@ const VisorDocumentos = ({
         <Progress open={openSlider}></Progress>
 
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Typography variant="h4">{obj.row.Folio}</Typography>
+          <Typography variant="h4">{obj.Folio}</Typography>
         </Box>
 
         <ToggleButton value="check">

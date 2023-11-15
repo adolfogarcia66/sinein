@@ -36,6 +36,6 @@ export class Servicios {
     return await postFile("getFile", data);
   }
   public static async informes(data: any) {
-    return await post("informes", data);
+    return await postFile("informes", data);
   }
 }
