@@ -39,6 +39,8 @@ const VisorDocumentos = ({
   const [URLruta, setURLRuta] = useState<string>("");
   const [tipoext, setTipoext] = useState<string>("");
 
+  const [file64, setfile64] = useState<string>("");
+
   const consulta = () => {
     let data = {
       NUMOPERACION: 2,
@@ -118,7 +120,6 @@ const VisorDocumentos = ({
 
   const handleVer = (v: any) => {
     setOpenSlider(true);
-    setverarchivo(true);
     setTipoext(v.row.FileName.split(".").pop());
 
     let data = {
@@ -127,6 +128,8 @@ const VisorDocumentos = ({
 
     Servicios.GetDocumento(data).then((res) => {
       if (res.SUCCESS) {
+        console.log(tipoext);
+        setfile64(res.RESPONSE);
         var bufferArray = base64ToArrayBuffer(String(res.RESPONSE));
         var blobStore = new Blob([bufferArray], { type: tipoext });
         var data = window.URL.createObjectURL(blobStore);
@@ -141,50 +144,6 @@ const VisorDocumentos = ({
         Swal.fire("¡Error!", res.STRMESSAGE, "error");
       }
     });
-
-    // const apiUrl = "http://10.200.4.201:80/api/SINEIN/GetDocumento";
-    // fetch(apiUrl, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ CHID: v.row.id }),
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error(`Error al obtener el archivo: ${response.status}`);
-    //     }
-    //     // Configurar los encabezados de la respuesta
-    //     const contentType = response.headers.get("Content-Type");
-    //     console.log(contentType);
-    //     //
-    //     // Obtener el contenido como array buffer
-    //     return response.arrayBuffer();
-    //   })
-    //   .then((arrayBuffer) => {
-
-    //      var bufferArray = base64ToArrayBuffer(String(response.data.RESPONSE));
-    //      var blobStore = new Blob([bufferArray], {
-    //        type: "application/*",
-    //      });
-
-    //      const link = document.createElement("a");
-    //      link.href = window.URL.createObjectURL(blobStore);
-    //      link.download = "INFORME DE INVESTIGACION.docx";
-    //     link.click();
-
-    //     // Crear un objeto Blob a partir del array buffer
-    //     const blob = new Blob([arrayBuffer]);
-    //     // Crear un objeto URL para el blob
-    //     const blobUrl = URL.createObjectURL(blob);
-    //     // Establecer la URL del blob en el estado
-    //     setURLRuta(blobUrl);
-    //     setOpenSlider(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error al obtener el archivo:", error.message);
-    //     Swal.fire("¡Error!", error.message, "error");
-    //   });
   };
 
   const ProcesaSPeis = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -375,18 +334,31 @@ const VisorDocumentos = ({
 
       {verarchivo ? (
         <ModalForm title={"Visualización"} handleClose={handleCloseModal}>
-          <DialogContent dividers={true}>
-            <Grid container spacing={1}>
-              <Grid item container justifyContent="center" xs={12}>
-                <div className="ContainerVisualizacionSPEI">
-                  {tipoext === "jpg" ? <img src={URLruta} alt="Archivo" /> : ""}
-                  {tipoext === "pdf" ? (
-                    <iframe width="100%" height="100%" src={URLruta} />
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </Grid>
+          <DialogContent
+            dividers={true}
+            style={{ width: "100%", height: "600px" }}
+          >
+            <Grid
+              container
+              spacing={1}
+              style={{ width: "100%", height: "100%" }}
+            >
+              {tipoext === "jpg" ? <img src={URLruta} alt="Archivo" /> : ""}
+              {tipoext === "pdf" ? (
+                // <embed
+                //   src={`data:application/pdf;base64,${file64}`} // Tipo MIME para PDF
+                //   type="application/pdf"
+                //   style={{ width: "100%", height: "100%" }}
+                // />
+
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`data:application/pdf;base64,${file64}`}
+                />
+              ) : (
+                ""
+              )}
             </Grid>
           </DialogContent>
         </ModalForm>
