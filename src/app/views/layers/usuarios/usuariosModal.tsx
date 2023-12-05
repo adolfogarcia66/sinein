@@ -2,7 +2,6 @@ import AddTaskIcon from "@mui/icons-material/AddTask";
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useLoadFilter } from "../../../hook/select";
 import { AlertS } from "../../../helpers/AlertS";
 import { SelectValues } from "../../../interfaces/Share";
 import { Servicios } from "../../../services/Servicios";
@@ -10,6 +9,9 @@ import { getItem } from "../../../services/localStorage";
 import ModalForm from "../../share/ModalForm";
 import Progress from "../../share/Progress";
 import SelectFrag from "../../share/SelectFrag";
+import { useLoadFilter } from "../../../hook/select";
+import { red } from "@mui/material/colors";
+import { desencrypta } from "../../../helpers/cifrado";
 export const UsuariosModal = ({
   handleClose,
   tipo,
@@ -23,6 +25,7 @@ export const UsuariosModal = ({
   const [id, setid] = useState("");
   const [Usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [email, setEmail] = useState("");
   const [nombre, setnombre] = useState("");
   const [apellidopaterno, setapellidopaterno] = useState("");
@@ -31,6 +34,58 @@ export const UsuariosModal = ({
   const [listaroles, setlistaroles] = useState<SelectValues[]>([]);
 
   const [isValidEmail, setIsValidEmail] = useState(true);
+
+  const handlePasswordChange = (e: any) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+
+    // Realiza la validación de la contraseña aquí
+    const isPasswordValid = validatePassword(newPassword);
+
+    // Construye el mensaje de error
+    const errorMessages = [];
+    if (newPassword.length < 8) {
+      errorMessages.push("La contraseña debe tener al menos 8 caracteres.");
+    }
+    if (!/[A-Z]/.test(newPassword)) {
+      errorMessages.push(
+        "La contraseña debe contener al menos una letra mayúscula."
+      );
+    }
+    if (!/[a-z]/.test(newPassword)) {
+      errorMessages.push(
+        "La contraseña debe contener al menos una letra minúscula."
+      );
+    }
+    if (!/\d/.test(newPassword)) {
+      errorMessages.push("La contraseña debe contener al menos un número.");
+    }
+    if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(newPassword)) {
+      errorMessages.push(
+        "La contraseña debe contener al menos un carácter especial."
+      );
+    }
+
+    setPasswordError(isPasswordValid ? "" : errorMessages.join("\n"));
+  };
+
+  const validatePassword = (password: any) => {
+    // Implementa tus reglas de validación de contraseña aquí
+    // Por ejemplo, longitud mínima, mayúsculas, minúsculas, números, caracteres especiales, etc.
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+
+    return (
+      password.length >= minLength &&
+      hasUpperCase &&
+      hasLowerCase &&
+      hasNumber &&
+      hasSpecialChar
+    );
+  };
 
   const validateEmail = (input: any) => {
     // Expresión regular para validar un correo electrónico
@@ -66,7 +121,7 @@ export const UsuariosModal = ({
       apellidopaterno: apellidopaterno,
       apellidomaterno: apellidomaterno,
       rol: roles,
-      CHUSER: getItem("id"),
+      CHUSER: JSON.parse(desencrypta(JSON.parse(String(getItem("l5"))))),
     };
 
     Servicios.usuarios(data).then((res) => {
@@ -153,9 +208,19 @@ export const UsuariosModal = ({
                 fullWidth
                 size="small"
                 variant="outlined"
-                onChange={(v) => setPassword(v.target.value)}
+                onChange={handlePasswordChange}
                 autoComplete="off"
               />
+
+              {passwordError && (
+                <Typography
+                  variant="caption"
+                  color={red}
+                  sx={{ fontFamily: "sans-serif" }}
+                >
+                  {passwordError}
+                </Typography>
+              )}
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <Typography sx={{ fontFamily: "sans-serif" }}>

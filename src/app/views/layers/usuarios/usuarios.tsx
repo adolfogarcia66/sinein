@@ -11,6 +11,7 @@ import { AlertS } from "../../../helpers/AlertS";
 import Swal from "sweetalert2";
 import { getItem } from "../../../services/localStorage";
 import { UsuariosModal } from "./usuariosModal";
+import { desencrypta } from "../../../helpers/cifrado";
 
 export const Usuarios = () => {
   const [show, setShow] = useState(false);
@@ -26,6 +27,7 @@ export const Usuarios = () => {
     };
 
     Servicios.usuarios(data).then((res) => {
+      console.log(res);
       if (res.SUCCESS) {
         setData(res.RESPONSE);
         setShow(false);
@@ -67,7 +69,7 @@ export const Usuarios = () => {
         let data = {
           NUMOPERACION: 3,
           CHID: v.data.row.Id,
-          CHUSER: getItem("id"),
+          CHUSER: JSON.parse(desencrypta(JSON.parse(String(getItem("l5"))))),
         };
 
         Servicios.usuarios(data).then((res) => {

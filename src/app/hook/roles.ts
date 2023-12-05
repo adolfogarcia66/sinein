@@ -6,21 +6,19 @@ export const loadRol = () => {
   const roles: IRoles[] = JSON.parse(
     desencrypta(JSON.parse(String(getItem("l3"))))
   );
-
+  console.log(roles);
   // Verificar si existe el rol "ADMINISTRADOR"
   const administrador = roles.find(
-    (rol: IRoles) => rol.ControlInterno === "ADMINISTRADOR"
+    (rol: IRoles) => rol.ControlInterno === "ADMIN"
   );
   if (administrador) {
-    setItem(encrypta("ADMINISTRADOR"), "l4");
+    setItem(encrypta("ADMIN"), "l4");
   }
 
   // Verificar si existe el rol "OPERATIVO"
-  const operativo = roles.find(
-    (rol: IRoles) => rol.ControlInterno === "OPERATIVO"
-  );
+  const operativo = roles.find((rol: IRoles) => rol.ControlInterno === "OPER");
   if (operativo) {
-    setItem(encrypta("OPERATIVO"), "l4");
+    setItem(encrypta("OPER"), "l4");
   }
 
   // Verificar si existe el rol "CONSULTA"
