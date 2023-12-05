@@ -8,8 +8,8 @@ import { getItem } from "../../../services/localStorage";
 import { AlertS } from "../../../helpers/AlertS";
 import { Servicios } from "../../../services/Servicios";
 import SelectFrag from "../../share/SelectFrag";
-import SelectValues from "../../../interfaces/Share";
-import { useLoadFilter } from "../../../Hook/select";
+import { SelectValues } from "../../../interfaces/Share";
+import { useLoadFilter } from "../../../hook/select";
 export const InteligenciaModa = ({
   handleClose,
   tipo,
@@ -167,6 +167,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setDia(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -191,6 +192,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setAnio(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -223,6 +225,7 @@ export const InteligenciaModa = ({
                 size="small"
                 style={{ height: "40px" }}
                 disabled
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -237,6 +240,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setTipo(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -253,6 +257,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setPuesto(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -269,6 +274,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setNombre(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -298,6 +304,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setCURP(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -312,6 +319,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setIMSS(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -328,6 +336,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setSolicitante(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -342,6 +351,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setForm(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -373,6 +383,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setVeritas(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -389,6 +400,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setEntrevista(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -403,6 +415,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setPC(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -446,6 +459,7 @@ export const InteligenciaModa = ({
                 onChange={(v) => setObservacion(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>

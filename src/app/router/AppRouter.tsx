@@ -6,6 +6,7 @@ import { Confianza } from "../views/layers/confianza/confianza";
 import { Inteligencia } from "../views/layers/inteligencia/inteligencia";
 import { Veritas } from "../views/layers/veritas/veritas";
 import { Investigacion } from "../views/layers/investigacion/investigacion";
+import { Usuarios } from "../views/layers/usuarios/usuarios";
 
 export const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ export const AppRouter = () => {
           <Route path="/analisis" element={<Analisis />}></Route>
           <Route path="/confianza" element={<Confianza />}></Route>
           <Route path="/veritas" element={<Veritas />}></Route>
+          <Route path="/usuarios" element={<Usuarios />}></Route>
         </Routes>
       </Inicio>
     </>

@@ -39,4 +39,8 @@ export class Servicios {
   public static async GetDocumento(data: any) {
     return await post("GetDocumento", data);
   }
+
+  public static async usuarios(data: any) {
+    return await post("usuarios", data);
+  }
 }

@@ -10,22 +10,25 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import backgroundImg from "../assets/img/backgroundImg.jpg"; // Importa la imagen desde tu carpeta assets
-import logo from "../assets/img/logop.png";
-import { useNavigate } from "react-router-dom";
-import Progress from "./share/Progress";
 import { useState } from "react";
-import { Servicios } from "../services/Servicios";
+import { useNavigate } from "react-router-dom";
+import backgroundImg from "../assets/img/backgroundImg.jpg"; // Importa la imagen desde tu carpeta assets
+
+import logo from "../assets/img/logop.png";
 import { AlertS } from "../helpers/AlertS";
+import { encrypta } from "../helpers/cifrado";
+import { Servicios } from "../services/Servicios";
 import { setItem } from "../services/localStorage";
+import Progress from "./share/Progress";
 
 export const Plogin = () => {
   const navigate = useNavigate();
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [slideropen, setslideropen] = useState(false);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [username, setUsername] = useState("");
   const [pass, setPass] = useState("");
+
   const login = () => {
     setslideropen(true);
     let data = {
@@ -34,14 +37,18 @@ export const Plogin = () => {
     };
 
     Servicios.login(data).then((res) => {
+      console.log(res);
       if (res.SUCCESS) {
-        if (res.RESPONSE.respuesta) {
-          setItem(res.RESPONSE.id, "id");
+        if (res.RESPONSE.login) {
+          setItem(true, "l1");
+          setItem(encrypta(JSON.stringify(res.RESPONSE.User)), "l2");
+          setItem(encrypta(JSON.stringify(res.RESPONSE.Roles)), "l3");
+          setItem(encrypta(JSON.stringify(res.RESPONSE.User.Id)), "l5");
           navigate("/inicio");
         } else {
           AlertS.fire({
             title: "¡Error!",
-            text: "Favor de Validar sus Credenciales",
+            text: res.STRMESSAGE,
             icon: "error",
           });
         }
@@ -61,8 +68,6 @@ export const Plogin = () => {
     <div>
       <Progress open={slideropen}></Progress>
       <Grid container component="main" sx={{ height: "100vh" }}>
-        {" "}
-        {/* Cambiar a sx= */}
         <CssBaseline />
         <Grid
           item
@@ -110,7 +115,7 @@ export const Plogin = () => {
               margin: "20px",
             }}
           >
-            SISTEMA DE INVESTIGACIÓN E INTELIGENCIA
+            SISTEMA DE CONTROL DE ACCESOS E INCIDENCIAS
           </Typography>
 
           <LoginIcon color="error" />

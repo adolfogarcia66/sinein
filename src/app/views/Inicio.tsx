@@ -39,7 +39,8 @@ import WarningIcon from "@mui/icons-material/Warning";
 import logos from "../assets/img/logo-jugos-del-valle.svg";
 import { useNavigate } from "react-router-dom";
 import AssessmentIcon from "@mui/icons-material/Assessment";
-const drawerWidth: number = 240;
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+const drawerWidth: number = 280;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -291,11 +292,11 @@ export default function Inicio({ children }: Props) {
             </ListItemIcon>
             <ListItemText primary="Veritas" />
           </ListItemButton>
-          <ListItemButton onClick={() => navigate("/veritas")}>
+          <ListItemButton onClick={() => navigate("/usuarios")}>
             <ListItemIcon>
-              <AssessmentIcon />
+              <SupervisorAccountIcon />
             </ListItemIcon>
-            <ListItemText primary="Reportes" />
+            <ListItemText primary="Administración de Usuarios" />
           </ListItemButton>
           <Divider sx={{ my: 1 }} />
         </List>

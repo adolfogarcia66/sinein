@@ -1,6 +1,6 @@
 import { FormControl } from "@mui/material";
 import Select from "react-select";
-import SelectValues from "../../interfaces/Share";
+import { SelectValues } from "../../interfaces/Share";
 
 const SelectFrag = ({
   value,

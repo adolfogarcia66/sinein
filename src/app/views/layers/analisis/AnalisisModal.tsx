@@ -4,8 +4,8 @@ import Progress from "../../share/Progress";
 import CloseIcon from "@mui/icons-material/Close";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { useLoadFilter } from "../../../Hook/select";
-import SelectValues from "../../../interfaces/Share";
+import { useLoadFilter } from "../../../hook/select";
+import { SelectValues } from "../../../interfaces/Share";
 import { Servicios } from "../../../services/Servicios";
 import { AlertS } from "../../../helpers/AlertS";
 import { getItem } from "../../../services/localStorage";
@@ -155,6 +155,7 @@ export const AnalisisModal = ({
                 onChange={(v) => setDia(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -178,6 +179,7 @@ export const AnalisisModal = ({
                 variant="outlined"
                 size="small"
                 onChange={(v) => setAnio(v.target.value)}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -209,6 +211,7 @@ export const AnalisisModal = ({
                 size="small"
                 onChange={(v) => setFolioInterno(v.target.value)}
                 disabled
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -222,6 +225,7 @@ export const AnalisisModal = ({
                 variant="outlined"
                 size="small"
                 onChange={(v) => setTipo(v.target.value)}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -235,6 +239,7 @@ export const AnalisisModal = ({
                 variant="outlined"
                 size="small"
                 onChange={(v) => setHechos(v.target.value)}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -302,6 +307,7 @@ export const AnalisisModal = ({
                 variant="outlined"
                 size="small"
                 onChange={(v) => setObservacion(v.target.value)}
+                autoComplete="off"
               />
             </Grid>
           </Grid>

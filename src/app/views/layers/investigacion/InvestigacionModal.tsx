@@ -8,8 +8,8 @@ import { Servicios } from "../../../services/Servicios";
 import { AlertS } from "../../../helpers/AlertS";
 import { getItem } from "../../../services/localStorage";
 import SelectFrag from "../../share/SelectFrag";
-import SelectValues from "../../../interfaces/Share";
-import { useLoadFilter } from "../../../Hook/select";
+import { SelectValues } from "../../../interfaces/Share";
+import { useLoadFilter } from "../../../hook/select";
 const InvestigacionModal = ({
   handleClose,
   tipo,
@@ -185,6 +185,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setDia(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -209,6 +210,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setAnio(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -238,6 +240,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setHechos(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -253,6 +256,7 @@ const InvestigacionModal = ({
                 size="small"
                 style={{ height: "40px" }}
                 disabled
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -269,6 +273,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimaNombre(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -285,6 +290,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimaNumeroEmpleado(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -314,6 +320,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimaCURP(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -328,6 +335,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimaIMSS(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -344,6 +352,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimaRazonSocial(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -360,6 +369,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimarioNombre(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -391,6 +401,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimarioNumeroEmpleado(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -405,6 +416,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimarioCURP(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -419,6 +431,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimarioIMSS(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -435,6 +448,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVictimarioRazonSocial(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -466,6 +480,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setEntrevista(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={3} lg={3}>
@@ -480,6 +495,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setPC(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={3} lg={3}>
@@ -496,6 +512,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setVeritas(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={3} lg={3}>
@@ -539,6 +556,7 @@ const InvestigacionModal = ({
                 onChange={(v) => setObservacion(v.target.value)}
                 size="small"
                 style={{ height: "40px" }}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
