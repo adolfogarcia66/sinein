@@ -65,53 +65,57 @@ const VisorDocumentos = ({
 
   // Luego, puedes llamar a este método con el CHID y FileName adecuados
   const handleDescargarFile = (v: any) => {
-    descargarArchivo(v.row.id, v.row.FileName);
-  };
+    const tipoext = v.row.FileName.split(".").pop().toLowerCase();
 
-  const descargarArchivo = (CHID: string, FileName: string) => {
-    const apiUrl = "http://10.200.4.201:80/api/SINEIN/getFile";
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ CHID }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error al obtener el archivo: ${response.status}`);
+    const data = {
+      CHID: v.row.id,
+    };
+
+    Servicios.GetDocumento(data)
+      .then((res) => {
+        if (res.SUCCESS) {
+          const fileData = res.RESPONSE;
+          // Crear un Blob a partir de los datos y tipo de archivo
+          const blob = new Blob([base64ToArrayBuffer(String(fileData))], {
+            type: getFileMimeType(tipoext),
+          });
+          // Crear un enlace de descarga
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = v.row.FileName; // Puedes establecer un nombre de archivo personalizado aquí
+          // Simular un clic en el enlace para iniciar la descarga
+          document.body.appendChild(link);
+          link.click();
+          // Eliminar el enlace después de la descarga
+          document.body.removeChild(link);
+          setOpenSlider(false);
+        } else {
+          setOpenSlider(false);
+          Swal.fire("¡Error!", res.STRMESSAGE, "error");
         }
-        // Configurar los encabezados de la respuesta
-        const contentType = response.headers.get("Content-Type");
-        // Obtener el contenido como array buffer
-        return response.arrayBuffer();
-      })
-      .then((arrayBuffer) => {
-        // Crear un objeto Blob a partir del array buffer
-        const blob = new Blob([arrayBuffer]);
-
-        // Crear un objeto URL para el blob
-        const blobUrl = URL.createObjectURL(blob);
-
-        // Crear un enlace para descargar el archivo
-        const link = document.createElement("a");
-        link.href = blobUrl;
-        link.download = FileName;
-        document.body.appendChild(link);
-
-        // Simular un clic en el enlace para iniciar la descarga
-        link.click();
-
-        // Limpiar el objeto URL después de la descarga
-        URL.revokeObjectURL(blobUrl);
-
-        // Eliminar el enlace del DOM
-        link.remove();
       })
       .catch((error) => {
-        console.error("Error al obtener el archivo:", error.message);
-        Swal.fire("¡Error!", error.message, "error");
+        // Manejar errores de la petición
+        console.error("Error al obtener el documento:", error);
+        setOpenSlider(false);
+        Swal.fire("¡Error!", "Error al obtener el documento.", "error");
       });
+  };
+
+  // Función para obtener el tipo MIME correcto para diferentes extensiones de archivo
+  const getFileMimeType = (extension: string): string => {
+    switch (extension) {
+      case "pdf":
+        return "application/pdf";
+      case "png":
+        return "image/png";
+      case "jpg":
+      case "jpeg":
+        return "image/jpeg";
+      // Agrega más tipos MIME según tus necesidades
+      default:
+        return "application/octet-stream"; // Tipo de archivo binario por defecto
+    }
   };
 
   const handleCloseModal = () => {
@@ -321,7 +325,7 @@ const VisorDocumentos = ({
             <input
               multiple
               hidden
-              accept=".*"
+              accept=".pdf, image/*"
               type="file"
               value=""
               onChange={(v) => ProcesaSPeis(v)}

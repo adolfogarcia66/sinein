@@ -62,7 +62,7 @@ export const Investigacion = () => {
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        url: "http://10.200.4.201:80/api/SINEIN/informes",
+        url: process.env.REACT_APP_APPLICATION_BASE_URL + "informes",
         headers: {
           "Content-Type": "application/json",
           responseType: "blob",
