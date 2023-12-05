@@ -6,6 +6,7 @@ import MultilineChartIcon from "@mui/icons-material/MultilineChart";
 import SearchIcon from "@mui/icons-material/Search";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import WarningIcon from "@mui/icons-material/Warning";
+import LogoutIcon from "@mui/icons-material/Logout";
 import {
   Box,
   Container,
@@ -261,6 +262,12 @@ export default function Inicio({ children }: Props) {
               ""
             )}
             <Divider sx={{ my: 1 }} />
+            <ListItemButton onClick={logout}>
+              <ListItemIcon>
+                <LogoutIcon className="IconoDentroBoton" />
+              </ListItemIcon>
+              <ListItemText primary="Cerrar Sesión " />
+            </ListItemButton>
           </List>
         </Drawer>
         <Box
