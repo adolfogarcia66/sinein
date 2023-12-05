@@ -5,6 +5,10 @@ export class Servicios {
     return await post("login", data);
   }
 
+  public static async logout(data: any) {
+    return await post("logout", data);
+  }
+
   public static async obtenerDoc(data: any) {
     return await postDoc("obtenerDoc", data);
   }
