@@ -53,44 +53,47 @@ export const Investigacion = () => {
   };
 
   const dowloandfile = (v: any) => {
-    try {
-      setShow(true);
-      let data = {
-        CHID: v.data.id,
-      };
+    setShow(true);
+    const data = {
+      CHID: v.data.id,
+    };
 
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: process.env.REACT_APP_APPLICATION_BASE_URL + "informes",
-        headers: {
-          "Content-Type": "application/json",
-          responseType: "blob",
-        },
-        data: data,
-      };
+    Servicios.informes(data)
+      .then((res) => {
+        if (res.SUCCESS) {
+          const fileData = res.RESPONSE;
+          // Tipo MIME para archivos .docx
+          const tipoMIME =
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-      axios
-        .request(config)
-        .then((response) => {
-          var bufferArray = base64ToArrayBuffer(String(response.data.RESPONSE));
-          var blobStore = new Blob([bufferArray], {
-            type: "application/*",
+          // Crear un Blob a partir de los datos y tipo de archivo
+          const blob = new Blob([base64ToArrayBuffer(String(fileData))], {
+            type: tipoMIME,
           });
 
+          // Crear un enlace de descarga
           const link = document.createElement("a");
-          link.href = window.URL.createObjectURL(blobStore);
-          link.download = "INFORME DE INVESTIGACION.docx";
+          link.href = URL.createObjectURL(blob);
+          link.download = v.data.row.Folio; // Puedes establecer un nombre de archivo personalizado aquí
+
+          // Simular un clic en el enlace para iniciar la descarga
+          document.body.appendChild(link);
           link.click();
+
+          // Eliminar el enlace después de la descarga
+          document.body.removeChild(link);
           setShow(false);
-        })
-        .catch((error) => {
-          console.log(error);
+        } else {
           setShow(false);
-        });
-    } catch (err: any) {
-      setShow(false);
-    }
+          Swal.fire("¡Error!", res.STRMESSAGE, "error");
+        }
+      })
+      .catch((error) => {
+        // Manejar errores de la petición
+        console.error("Error al obtener el documento:", error);
+        setShow(false);
+        Swal.fire("¡Error!", "Error al obtener el documento.", "error");
+      });
   };
 
   const handlefiles = (v: any) => {

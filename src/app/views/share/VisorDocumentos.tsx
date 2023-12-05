@@ -231,6 +231,7 @@ const VisorDocumentos = ({
           modulo: obj.modulo,
           modulo_id: obj.moduloid,
           ruta: obj.ruta,
+          CHID: v.data.id,
         };
 
         Servicios.FilesAdmin(data).then((res) => {
