@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import WarningIcon from "@mui/icons-material/Warning";
 import LogoutIcon from "@mui/icons-material/Logout";
+import KeyIcon from "@mui/icons-material/Key";
 import {
   Box,
   Container,
@@ -95,6 +96,10 @@ export default function Inicio({ children }: Props) {
   const [rol, setRol] = useState("");
   const [contador, setContador] = useState(0);
   const [showExpiredModal, setShowExpiredModal] = useState(false);
+
+  const changepassword = async () => {
+    navigate("/cp");
+  };
 
   const logout = async () => {
     try {
@@ -267,6 +272,12 @@ export default function Inicio({ children }: Props) {
                 <LogoutIcon className="IconoDentroBoton" />
               </ListItemIcon>
               <ListItemText primary="Cerrar Sesión " />
+            </ListItemButton>
+            <ListItemButton onClick={changepassword}>
+              <ListItemIcon>
+                <KeyIcon />
+              </ListItemIcon>
+              <ListItemText primary="Cambiar Contraseña " />
             </ListItemButton>
           </List>
         </Drawer>

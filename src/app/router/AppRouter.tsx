@@ -9,10 +9,16 @@ import { Investigacion } from "../views/layers/investigacion/investigacion";
 import { Usuarios } from "../views/layers/usuarios/usuarios";
 import { loadRol } from "../hook/roles";
 import { getItem } from "../services/localStorage";
+import ChangePassword from "../views/share/changePassword";
+import { desencrypta } from "../helpers/cifrado";
 
 export const AppRouter = () => {
   loadRol();
   const flag = getItem("l1");
+  const user = JSON.parse(
+    desencrypta(JSON.parse(String(getItem("l2"))))
+  ) as any;
+
   return (
     <>
       <Inicio>
@@ -44,6 +50,16 @@ export const AppRouter = () => {
           <Route
             path="/usuarios"
             element={flag ? <Usuarios /> : <Navigate to="/" replace />}
+          ></Route>
+          <Route
+            path="/cp"
+            element={
+              flag ? (
+                <ChangePassword usuario={user} />
+              ) : (
+                <Navigate to="/" replace />
+              )
+            }
           ></Route>
         </Routes>
       </Inicio>
