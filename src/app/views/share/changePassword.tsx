@@ -209,6 +209,7 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
             fullWidth
             variant="contained"
             color="primary"
+            disabled={IsValid}
           >
             Cambiar Contraseña
           </Button>
