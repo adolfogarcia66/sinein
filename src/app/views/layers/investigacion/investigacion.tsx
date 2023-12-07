@@ -61,6 +61,63 @@ export const Investigacion = () => {
       .then((res) => {
         if (res.SUCCESS) {
           const fileData = res.RESPONSE;
+          const tipoMIME =
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+
+          const blob = new Blob([base64ToArrayBuffer(String(fileData))], {
+            type: tipoMIME,
+          });
+          const url = URL.createObjectURL(blob);
+
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = v.data.row.Folio;
+
+          // Evento de progreso
+          const onProgress = (event: any) => {
+            if (event.lengthComputable) {
+              const percentComplete = (event.loaded / event.total) * 100;
+              console.log(
+                `Descarga: ${percentComplete.toFixed(2)}% completada`
+              );
+              // Aquí puedes actualizar tu interfaz de usuario con el porcentaje
+            }
+          };
+
+          // Configurar el objeto XMLHttpRequest
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", url, true);
+          xhr.responseType = "blob";
+
+          // Agregar el evento de progreso
+          xhr.addEventListener("progress", onProgress);
+
+          // Evento de carga completada
+          xhr.onload = () => {
+            if (xhr.status === 200) {
+              // Simular un clic en el enlace para iniciar la descarga
+              document.body.appendChild(link);
+              link.click();
+              // Eliminar el enlace después de la descarga
+              document.body.removeChild(link);
+            }
+          };
+
+          // Iniciar la solicitud
+          xhr.send();
+        } else {
+          Swal.fire("¡Error!", res.STRMESSAGE, "error");
+        }
+      })
+      .catch((error) => {
+        // Manejar errores de la petición
+        console.error("Error al obtener el documento:", error);
+        Swal.fire("¡Error!", "Error al obtener el documento.", "error");
+      });
+    /*Servicios.informes(data)
+      .then((res) => {
+        if (res.SUCCESS) {
+          const fileData = res.RESPONSE;
           // Tipo MIME para archivos .docx
           const tipoMIME =
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
@@ -93,6 +150,7 @@ export const Investigacion = () => {
         setShow(false);
         Swal.fire("¡Error!", "Error al obtener el documento.", "error");
       });
+  */
   };
 
   const handlefiles = (v: any) => {
