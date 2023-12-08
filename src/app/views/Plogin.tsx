@@ -115,7 +115,7 @@ export const Plogin = () => {
               margin: "20px",
             }}
           >
-            SISTEMA DE CONTROL DE ACCESOS E INCIDENCIAS
+            SISTEMA DE INVESTIGACION E INTELIGENCIA
           </Typography>
 
           <LoginIcon color="error" />
