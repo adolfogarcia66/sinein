@@ -4,5 +4,5 @@ export const setItem = (data: any, item: string) => {
 };
 export const getItem = (item: string): any => {
   const value = localStorage.getItem(item);
-  return value !== null ? String(value) : undefined;
+  return value !== null ? String(value) : "";
 };
