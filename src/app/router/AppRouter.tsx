@@ -14,10 +14,14 @@ import { desencrypta } from "../helpers/cifrado";
 
 export const AppRouter = () => {
   loadRol();
-  const flag = getItem("l1");
-  const user = JSON.parse(
-    desencrypta(JSON.parse(String(getItem("l2"))))
-  ) as any;
+  let flag;
+  let user;
+  try {
+    flag = getItem("l1");
+    user = JSON.parse(desencrypta(JSON.parse(String(getItem("l2"))))) as any;
+  } catch (error) {
+    console.error("Error al procesar los datos:", error);
+  }
 
   return (
     <>
