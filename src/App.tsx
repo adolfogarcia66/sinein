@@ -33,8 +33,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Plogin />} />
-          <Route path="/*" element={<AppRouter />} />
+          <Route path="/sinein" element={<Plogin />} />
+          <Route path="/sinein/*" element={<AppRouter />} />
         </Routes>
       </BrowserRouter>
     </div>

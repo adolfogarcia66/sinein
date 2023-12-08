@@ -115,7 +115,7 @@ export default function Inicio({ children }: Props) {
 
       if (res.SUCCESS) {
         localStorage.clear();
-        navigate("/");
+        navigate("/sinein");
       } else {
         throw new Error("No response from the server");
       }

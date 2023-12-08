@@ -101,7 +101,7 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
         const res = await Servicios.logout(data);
         if (res.SUCCESS) {
           localStorage.clear();
-          navigate("/");
+          navigate("/sinein");
         } else {
           throw new Error("No response from the server");
         }
