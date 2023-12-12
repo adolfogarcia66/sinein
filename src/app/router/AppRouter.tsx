@@ -28,40 +28,44 @@ export const AppRouter = () => {
       <Inicio>
         <Routes>
           <Route
-            path="/inicio"
-            element={flag ? <Bienvenido /> : <Navigate to="/" replace />}
+            path="/sinein/inicio"
+            element={flag ? <Bienvenido /> : <Navigate to="/sinein" replace />}
           ></Route>
           <Route
-            path="/investigacion"
-            element={flag ? <Investigacion /> : <Navigate to="/" replace />}
+            path="/sinein/investigacion"
+            element={
+              flag ? <Investigacion /> : <Navigate to="/sinein" replace />
+            }
           ></Route>
           <Route
-            path="/inteligencia"
-            element={flag ? <Inteligencia /> : <Navigate to="/" replace />}
+            path="/sinein/inteligencia"
+            element={
+              flag ? <Inteligencia /> : <Navigate to="/sinein" replace />
+            }
           ></Route>
           <Route
-            path="/analisis"
-            element={flag ? <Analisis /> : <Navigate to="/" replace />}
+            path="/sinein/analisis"
+            element={flag ? <Analisis /> : <Navigate to="/sinein" replace />}
           ></Route>
           <Route
-            path="/confianza"
-            element={flag ? <Confianza /> : <Navigate to="/" replace />}
+            path="/sinein/confianza"
+            element={flag ? <Confianza /> : <Navigate to="/sinein" replace />}
           ></Route>
           <Route
-            path="/veritas"
-            element={flag ? <Veritas /> : <Navigate to="/" replace />}
+            path="/sinein/veritas"
+            element={flag ? <Veritas /> : <Navigate to="/sinein" replace />}
           ></Route>
           <Route
-            path="/usuarios"
-            element={flag ? <Usuarios /> : <Navigate to="/" replace />}
+            path="/sinein/usuarios"
+            element={flag ? <Usuarios /> : <Navigate to="/sinein" replace />}
           ></Route>
           <Route
-            path="/cp"
+            path="/sinein/cp"
             element={
               flag ? (
                 <ChangePassword usuario={user} />
               ) : (
-                <Navigate to="/" replace />
+                <Navigate to="/sinein" replace />
               )
             }
           ></Route>

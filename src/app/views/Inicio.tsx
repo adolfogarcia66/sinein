@@ -98,7 +98,7 @@ export default function Inicio({ children }: Props) {
   const [showExpiredModal, setShowExpiredModal] = useState(false);
 
   const changepassword = async () => {
-    navigate("/cp");
+    navigate("/sinein/cp");
   };
 
   const logout = async () => {
@@ -217,7 +217,7 @@ export default function Inicio({ children }: Props) {
               alt="Descripción de la imagen"
               width="100"
               height="70"
-              onClick={() => navigate("/inicio")} // Agrega un evento onClick
+              onClick={() => navigate("/sinein/inicio")} // Agrega un evento onClick
               style={{
                 cursor: "pointer",
                 marginRight: "20px",
@@ -230,38 +230,38 @@ export default function Inicio({ children }: Props) {
           <Divider />
 
           <List component="nav">
-            <ListItemButton onClick={() => navigate("/investigacion")}>
+            <ListItemButton onClick={() => navigate("/sinein/investigacion")}>
               <ListItemIcon>
                 <SearchIcon />
               </ListItemIcon>
               <ListItemText primary="Investigación" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/inteligencia")}>
+            <ListItemButton onClick={() => navigate("/sinein/inteligencia")}>
               <ListItemIcon>
                 <ManageAccountsIcon />
               </ListItemIcon>
               <ListItemText primary="Inteligencia" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/analisis")}>
+            <ListItemButton onClick={() => navigate("/sinein/analisis")}>
               <ListItemIcon>
                 <MultilineChartIcon />
               </ListItemIcon>
               <ListItemText primary="Análisis" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/confianza")}>
+            <ListItemButton onClick={() => navigate("/sinein/confianza")}>
               <ListItemIcon>
                 <CheckIcon />
               </ListItemIcon>
               <ListItemText primary="Prueba de Confianza" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/veritas")}>
+            <ListItemButton onClick={() => navigate("/sinein/veritas")}>
               <ListItemIcon>
                 <WarningIcon />
               </ListItemIcon>
               <ListItemText primary="Veritas" />
             </ListItemButton>
             {rol === "ADMIN" ? (
-              <ListItemButton onClick={() => navigate("/usuarios")}>
+              <ListItemButton onClick={() => navigate("/sinein/usuarios")}>
                 <ListItemIcon>
                   <SupervisorAccountIcon />
                 </ListItemIcon>
