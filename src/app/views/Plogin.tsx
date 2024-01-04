@@ -67,6 +67,7 @@ export const Plogin = () => {
           setItem(encrypta(JSON.stringify(res.RESPONSE.User)), "l2");
           setItem(encrypta(JSON.stringify(res.RESPONSE.Roles)), "l3");
           setItem(encrypta(JSON.stringify(res.RESPONSE.User.Id)), "l5");
+          setItem(encrypta(JSON.stringify(res.RESPONSE.User.bp)), "l6");
           if(res.RESPONSE.User.bp){
             navigate("/sinein/inicio");
           }else{
