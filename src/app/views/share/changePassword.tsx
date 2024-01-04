@@ -14,6 +14,7 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [passwordError2, setPasswordError2] = useState("");
   const [IsValid, setIsValid] = useState(true);
 
   const validatePassword = (password: any) => {
@@ -38,12 +39,15 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
     const ver = e.target.value;
     setConfirmPassword(ver);
     console.log(ver);
-    if (ver === newPassword) {
-      setIsValid(false);
-    } else {
-      setIsValid(true);
+      if (ver === newPassword && validatePassword(ver)) {
+        setIsValid(false);
+      } else {
+        setIsValid(true);
     }
+
+   
   };
+
   const handlePasswordChange = (e: any) => {
     const newPassword = e.target.value;
     setNewPassword(newPassword);
@@ -118,10 +122,7 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
     });
   };
 
-  useEffect(() => {
-    console.log("se imprime el usuario");
-    console.log(usuario);
-  }, []);
+  
 
   return (
     <>
@@ -200,6 +201,8 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
             helperText={IsValid ? "Las Contraseñas No son iguales" : ""}
             autoComplete="off"
             onPaste={(e) => e.preventDefault()} // Prevenir la acción de pegar
+
+          
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>

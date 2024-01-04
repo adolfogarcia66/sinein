@@ -18,9 +18,13 @@ export const AppRouter = () => {
   let user;
   try {
     flag = getItem("l1");
-    user = JSON.parse(desencrypta(JSON.parse(String(getItem("l2"))))) as any;
+    if(flag){
+      user = JSON.parse(desencrypta(JSON.parse(String(getItem("l2"))))) as any;
+    }else{
+
+    }
+ 
   } catch (error) {
-    console.error("Error al procesar los datos:", error);
   }
 
   return (
