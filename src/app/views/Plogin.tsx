@@ -67,7 +67,21 @@ export const Plogin = () => {
           setItem(encrypta(JSON.stringify(res.RESPONSE.User)), "l2");
           setItem(encrypta(JSON.stringify(res.RESPONSE.Roles)), "l3");
           setItem(encrypta(JSON.stringify(res.RESPONSE.User.Id)), "l5");
-          navigate("/sinein/inicio");
+          if(res.RESPONSE.User.bp){
+            navigate("/sinein/inicio");
+          }else{
+            AlertS.fire({
+              title: "¡Aviso!",
+              text: "Contraseña Vencida, Favor de Realizar el Cambio",
+              icon: "error",
+            });
+            navigate("/sinein/cp");
+          }
+
+
+         
+
+
         } else {
           if(res.NUMCODE==2525){
 

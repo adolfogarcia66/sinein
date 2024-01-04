@@ -20,25 +20,33 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
   const validatePassword = (password: any) => {
     // Implementa tus reglas de validación de contraseña aquí
     // Por ejemplo, longitud mínima, mayúsculas, minúsculas, números, caracteres especiales, etc.
-    const minLength = 8;
+    const minLength = 12;
+    const maxLength = 16;
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumber = /\d/.test(password);
     const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+    const hasConsecutiveChars = /(.)\1\1/.test(password); // Nueva regla
 
+    // La longitud de la contraseña debe estar entre minLength y maxLength
+    const isValidLength = password.length >= minLength && password.length <= maxLength;
+
+    // Todas las condiciones deben cumplirse para que la contraseña sea válida
     return (
-      password.length >= minLength &&
+      isValidLength &&
       hasUpperCase &&
       hasLowerCase &&
       hasNumber &&
-      hasSpecialChar
+      hasSpecialChar &&
+      !hasConsecutiveChars
     );
-  };
+};
+
 
   const verifypassword = (e: any) => {
     const ver = e.target.value;
     setConfirmPassword(ver);
-    console.log(ver);
+    console.log(validatePassword(ver));
       if (ver === newPassword && validatePassword(ver)) {
         setIsValid(false);
       } else {
@@ -57,9 +65,16 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
 
     // Construye el mensaje de error
     const errorMessages = [];
-    if (newPassword.length < 8) {
-      errorMessages.push("La contraseña debe tener al menos 8 caracteres.");
+
+    
+    if (newPassword.length < 12) {
+      errorMessages.push("La contraseña debe tener al menos 12 caracteres.");
     }
+
+     if (newPassword.length > 16) {
+      errorMessages.push("La contraseña no debe ser mayor a 16 caracteres.");
+    }
+
     if (!/[A-Z]/.test(newPassword)) {
       errorMessages.push(
         "La contraseña debe contener al menos una letra mayúscula."
@@ -78,6 +93,16 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
         "La contraseña debe contener al menos un carácter especial."
       );
     }
+
+    if ( /(.)\1\1/.test(newPassword)) {
+      errorMessages.push(
+        "No contener más de tres caracteres idénticos de forma consecutiva"
+      );
+    }
+
+   
+
+    
 
     setPasswordError(isPasswordValid ? "" : errorMessages.join("\n"));
   };
@@ -171,7 +196,7 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
             variant="outlined"
             onChange={handlePasswordChange}
             autoComplete="off"
-            onPaste={(e) => e.preventDefault()} // Prevenir la acción de pegar
+          //  onPaste={(e) => e.preventDefault()} // Prevenir la acción de pegar
           />
 
           {passwordError && (
@@ -200,7 +225,7 @@ const ChangePassword = ({ usuario }: { usuario: any }) => {
             error={IsValid}
             helperText={IsValid ? "Las Contraseñas No son iguales" : ""}
             autoComplete="off"
-            onPaste={(e) => e.preventDefault()} // Prevenir la acción de pegar
+           // onPaste={(e) => e.preventDefault()} // Prevenir la acción de pegar
 
           
           />
